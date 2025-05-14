@@ -3,8 +3,23 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 const app = express();
 const PORT = process.env.PORT || 3000;
+const cors = require('cors');
 
+//Cors
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',       // local frontend
+    'https://anojganesh.com',     // production frontend
+    'https://www.anojganesh.com', // production frontend
+    'https://anojganeshdev.netlify.app/', // dev frontend
+  ],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true,             // Allow credentials
+  optionsSuccessStatus: 200        // For legacy browser support
+};
 
+app.use(cors(corsOptions));  // Apply CORS settings globally
 
 // Configuration
 const MY_IP = process.env.MY_IP; // ← My IP address, ENV variable
